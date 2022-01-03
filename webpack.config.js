@@ -1,9 +1,9 @@
 const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
   mode: 'development',
-  entry: './src/index.js',
+  entry: ['./src/index.js'],
   devtool: 'inline-source-map',
   module: {
     rules: [
@@ -16,17 +16,22 @@ module.exports = {
             presets: ['@babel/preset-env']
           }
         }
+      },
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader'
       }
     ]
   }, 
   plugins: [
-    new HtmlWebpackPlugin({
-     title: 'Output Management',
-    }),
   ],
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
+  plugins: [
+    // make sure to include the plugin!
+    new VueLoaderPlugin()
+  ]
 }
