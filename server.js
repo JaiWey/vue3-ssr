@@ -13,7 +13,17 @@ app.use(devMiddleware(compiler));
 app.use(hotMiddleware(compiler));
 
 
+
+
+const bodyParser = require('body-parser')
+app.use(bodyParser.json())
+const api = require('./server/api')
+
+app.use('/api', api)
+
+
 app.use(express.static('public'));
+
 
 const port = 9000;
 
