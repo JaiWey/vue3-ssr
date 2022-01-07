@@ -1,11 +1,12 @@
 {
   "scripts": {
     "build": "webpack",
-    "dev": "nodemon server.js",
+    "dev": "nodemon --exec babel-node server.js ",
     "start": "node server.js"
   },
   "devDependencies": {
     "@babel/core": "^7.16.7",
+    "@babel/node": "^7.16.7",
     "@babel/preset-env": "^7.16.7",
     "@vue/compiler-sfc": "^3.2.26",
     "babel-loader": "^8.2.3",
