@@ -8,7 +8,7 @@ import Detail from './components/Detail.vue'
 // const Detail = { template: '<div>About</div>' }
 const routes = [
   { path: '/', component: Home },
-  { path: '/detail', component: Detail },
+  { path: '/detail/:id', component: Detail },
 ]
 
 const router = createRouter({

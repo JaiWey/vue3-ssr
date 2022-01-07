@@ -1,6 +1,6 @@
 <template>
   <div>
-  <h1>Hello from the AppComponent</h1>
+  <h1>List</h1>
     <p>
     <!-- use the router-link component for navigation. -->
     <!-- specify the link by passing the `to` prop. -->

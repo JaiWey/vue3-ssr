@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div v-for="(person, i) in people" :key="i">
+  <div style="display: flex; flex-wrap: wrap">
+    <div style="width: 200px; border: 1px solid #aaa;" v-for="(person, i) in people" :key="i" @click="toDetail(person)">
       <h3>{{person.name}}</h3> 
       <h5>{{person.gender}}</h5> 
     </div>
@@ -23,6 +23,10 @@ export default {
         this.people = res.data.results
       })
     },
+    toDetail(p) {
+      const found = p.url.match(/https:\/\/swapi.dev\/api\/people\/(\d)*\//)
+      this.$router.push(`/detail/${found[1]}`)
+    }
   }
 };
 </script>
