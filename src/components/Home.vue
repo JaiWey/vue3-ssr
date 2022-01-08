@@ -8,18 +8,30 @@
 </template>
 <script>
 import axios from 'axios'
+import { fetchGet } from '../fetch'
+import store from '../../ssr/store'
 export default {
-  name: "App",
+  name: "Home",
   data: () => ({
     people: []
   }),
+  created() {
+    if (store.initData) {
+      this.people = store.initData
+      delete store.initData
+    }
+  },
   mounted() {
-    this.initData()
+    if (this.people.length == 0) {
+      this._.type.asyncFetch().then(res => {
+        this.people = res
+      })
+    }
+    //this.initData()
   },
   methods: {
     initData() {
       axios.get('/api/people?page=1').then(res => {
-        console.log(res)
         this.people = res.data.results
       })
     },
@@ -27,6 +39,10 @@ export default {
       const found = p.url.match(/https:\/\/swapi.dev\/api\/people\/(\d)*\//)
       this.$router.push(`/detail/${found[1]}`)
     }
+  },
+  async asyncFetch() {
+    const res = await fetchGet('/api/people?page=1')
+    return res.data.results
   }
 };
 </script>

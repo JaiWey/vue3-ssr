@@ -1,33 +1,29 @@
+
 import express from 'express'
 import path from 'path'
-import api from './server/api'
-
+import { render } from './render.js';
+import api from '../server/api'
 const app = express();
 
 const webpack = require('webpack');
 const devMiddleware = require('webpack-dev-middleware');
 const hotMiddleware = require('webpack-hot-middleware');
-const config = require('./webpack.config.js');
-config.entry.push('webpack-hot-middleware/client')
-config.plugins.push(new webpack.HotModuleReplacementPlugin())
+const config = require('../webpack.config.js');
+//config.entry.push('webpack-hot-middleware/client')
+//config.plugins.push(new webpack.HotModuleReplacementPlugin())
 const compiler = webpack(config);
 app.use(devMiddleware(compiler));
-app.use(hotMiddleware(compiler));
+//app.use(hotMiddleware(compiler));
 
-
+//app.use(express.static('public'));
 
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
+//const api = require('../server/api')
 
 app.use('/api', api)
 
-
-app.use(express.static('public'));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve('public/index.html'));
-});
-
+app.get('*', render);
 
 const port = 9000;
 

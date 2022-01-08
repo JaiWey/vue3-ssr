@@ -13,7 +13,8 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env']
+            presets: ['@babel/preset-env'],
+            plugins: ["@babel/transform-runtime"]
           }
         }
       },
@@ -23,8 +24,6 @@ module.exports = {
       }
     ]
   }, 
-  plugins: [
-  ],
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),

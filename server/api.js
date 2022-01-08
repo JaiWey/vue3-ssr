@@ -26,4 +26,4 @@ router.get('/people/:id', async function (req, res) {
   res.json(result.data)
 })
 
-module.exports = router
+export default router
